@@ -1,0 +1,18 @@
+{
+  "تاريخ": [
+    { "id": "q1", "categoryId": "history", "points": 100, "question": "متى تأسست المملكة العربية السعودية؟", "answer": "1932", "isAnswered": false },
+    { "id": "q2", "categoryId": "history", "points": 100, "question": "من هو أول ملوك السعودية؟", "answer": "الملك عبدالعزيز", "isAnswered": false },
+    { "id": "q3", "categoryId": "history", "points": 300, "question": "في أي عام اندلعت الحرب العالمية الثانية؟", "answer": "1939", "isAnswered": false },
+    { "id": "q4", "categoryId": "history", "points": 300, "question": "من القائد المسلم في معركة اليرموك؟", "answer": "خالد بن الوليد", "isAnswered": false },
+    { "id": "q5", "categoryId": "history", "points": 500, "question": "في أي عام وقعت معركة القادسية؟", "answer": "636 ميلادي", "isAnswered": false },
+    { "id": "q6", "categoryId": "history", "points": 500, "question": "من هو مؤسس الدولة العباسية؟", "answer": "أبو العباس السفاح", "isAnswered": false }
+  ],
+  "معلومات عامة": [
+    { "id": "q7", "categoryId": "info-General", "points": 100, "question": "ما هو أطول نهر في العالم؟", "answer": "نهر النيل", "isAnswered": false },
+    { "id": "q8", "categoryId": "info-General", "points": 100, "question": "كم عدد الكواكب في المجموعة الشمسية؟", "answer": "8 كواكب", "isAnswered": false },
+    { "id": "q9", "categoryId": "info-General", "points": 300, "question": "ما هي عاصمة أستراليا؟", "answer": "كانبيرا", "isAnswered": false },
+    { "id": "q10", "categoryId": "info-General", "points": 300, "question": "من اخترع المصباح الكهربائي؟", "answer": "توماس إديسون", "isAnswered": false },
+    { "id": "q11", "categoryId": "info-General", "points": 500, "question": "ما هي أكبر قارة من حيث المساحة؟", "answer": "آسيا", "isAnswered": false },
+    { "id": "q12", "categoryId": "info-General", "points": 500, "question": "ما اسم أول قمر صناعي تم إطلاقه؟", "answer": "سبوتنيك", "isAnswered": false }
+  ]
+}

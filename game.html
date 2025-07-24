@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اللعبة الثقافية</title>
+  <style>
+    /* التصميم العام */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0f3057, #00587a, #008891);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #333;
+    }
+    
+        @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .container::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      color: #1a2a6c;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* قسم الفرق */
+    #teams {
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 25px 0;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 2px solid #e0e0e0;
+    }
+    
+    #teams strong {
+      font-size: 1.4rem;
+      color: #1a2a6c;
+      display: inline-block;
+      padding: 0 10px;
+    }
+    
+    #scores {
+      display: block;
+      margin: 15px 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+    
+    #score1, #score2 {
+      display: inline-block;
+      min-width: 40px;
+      padding: 5px 10px;
+      background: #1a2a6c;
+      color: white;
+      border-radius: 10px;
+      margin: 0 5px;
+    }
+    
+    #currentTurn {
+      display: block;
+      font-size: 1.3rem;
+      margin-top: 15px;
+      padding: 10px;
+      background: linear-gradient(135deg, #0f3057, #00587a, #008891);
+      color: #f6f5f5;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    
+    #turnTeam {
+      color: #b4b0b0;
+      text-decoration: underline;
+    }
+    
+    /* لوحة اللعبة */
+#gameBoard {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* مسافة بين الفئات */
+  flex-wrap: wrap;
+  margin-top: 20px;
+}    
+    .game-cell {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to bottom, #1a2a6c, #0d1b4d);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .game-cell:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(to bottom, #b21f1f, #8c1919);
+    }
+    
+    .game-cell::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+      z-index: 0;
+    }
+    
+    .game-cell > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+.category {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.category h2 {
+  margin-bottom: 15px;
+}
+
+.category button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+      background: linear-gradient(135deg, #0f3057, #00587a, #008891);
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+}    
+    .points {
+      font-size: 1.5rem;
+      margin-top: 8px;
+    }
+    
+    .answered {
+      background: linear-gradient(to bottom, #555, #333) !important;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    
+    /* نافذة السؤال */
+    #questionBox {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      border: 5px solid #1a2a6c;
+      animation: popIn 0.4s ease;
+    }
+    
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+    
+    #questionText {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    #questionBox button {
+      background: linear-gradient(to right, #1a2a6c, #b21f1f);
+      color: white;
+      border: none;
+      padding: 12px 35px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    #questionBox button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(to right, #0d1b4d, #8c1919);
+    }
+    
+    /* نافذة نهاية اللعبة */
+    #endGameModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .modal-content {
+      background: linear-gradient(135deg, #0f3057, #00587a, #008891);
+      padding: 40px 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      color: white;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #0f3057, #00587a, #008891);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    .modal-content::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #0f3057, #00587a, #008891);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    #endGameMessage {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+      line-height: 1.5;
+    }
+    
+    #restartBtn {
+      margin-top: 20px;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      background: linear-gradient(to right, #7dacb2, #1d7792);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    #restartBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(to right, #1d9237, #16772c);
+    }
+    
+    /* تصميم متجاوب */
+    @media (max-width: 768px) {
+      .container {
+        padding: 25px 15px;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      #teams strong {
+        font-size: 1.2rem;
+      }
+      
+      #scores, #currentTurn {
+        font-size: 1.1rem;
+      }
+      
+      #gameBoard {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      
+      .game-cell {
+        font-size: 1rem;
+      }
+      
+      .category-name {
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      #gameBoard {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      #questionText {
+        font-size: 1.2rem;
+      }
+      
+      #endGameMessage {
+        font-size: 1.5rem;
+      }
+    }
+    .btn {
+  background: #2196F3;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>اللعبة الثقافية</h1>
+
+<div id="teams">
+  <strong id="team1Name"></strong> ضد <strong id="team2Name"></strong><br>
+  <span id="scores">النقاط: <span id="score1">0</span> - <span id="score2">0</span></span><br>
+  <span id="currentTurn">دور: <span id="turnTeam"></span></span>
+</div>
+<div id="teams">       
+
+<div id="gameBoard" class="flex flex-wrap gap-4 justify-center"></div>
+    <div id="questionBox" style="display:none;">
+      <p id="questionText"></p>
+      <button onclick="closeQuestion()">إغلاق</button>
+      </div>
+    
+  </div>
+  </div>
+  
+<!-- نافذة إعلان نهاية اللعبة -->
+<div id="endGameModal">
+    <div class="modal-content">
+    <p id="endGameMessage"></p>
+    <button id="restartBtn">بدء من جديد</button>
+  </div>
+</div>
+  <script src="js/game.js"></script>
+</body>
+</html>
