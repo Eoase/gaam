@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  background-color: #f4f4f4;
+  padding: 30px;
+  text-align: center;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+input[type="text"] {
+  display: block;
+  width: 100%;
+  margin: 10px 0 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+#categories label {
+  background: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button {
+  background: #2196F3;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#gameBoard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.category {
+  background: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.category h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.category button {
+  display: block;
+  margin: 5px auto;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#questionBox {
+  margin-top: 30px;
+  background: #fffbe7;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#teams {
+  margin-bottom: 20px;
+  font-size: 18px;
+  line-height: 2;
+}
+
+#currentTurn span {
+  font-weight: bold;
+  color: #d32f2f;
+}

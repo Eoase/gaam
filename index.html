@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لعبة ثقافية جماعية</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0f3057, #00587a, #008891);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #333;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0, 136, 145, 0.2);
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #0f3057, #00587a, #008891);
+    }
+    
+    h1 {
+      color: #0f3057;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      right: 25%;
+      height: 3px;
+      background: linear-gradient(90deg, #00587a, #008891);
+      border-radius: 3px;
+    }
+    
+    .input-group {
+      margin-bottom: 25px;
+      text-align: right;
+      position: relative;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #0f3057;
+      font-size: 1.2rem;
+    }
+    
+    input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e0f7fa;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      background-color: #f8fdff;
+      text-align: right;
+      color: #00587a;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #008891;
+      box-shadow: 0 0 0 3px rgba(0, 136, 145, 0.2);
+      background-color: #fff;
+    }
+    
+    input::placeholder {
+      color: #90a4ae;
+    }
+    
+    button {
+      background: linear-gradient(135deg, #0f3057, #008891);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0, 88, 122, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 88, 122, 0.4);
+      background: linear-gradient(135deg, #008891, #0f3057);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    .icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+      color: #0f3057;
+    }
+    
+    .icon-box {
+      background-color: rgba(0, 136, 145, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      width: 80px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .icon-box:hover {
+      transform: translateY(-5px);
+      background-color: rgba(0, 136, 145, 0.2);
+    }
+    
+    .icon-box i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #00587a;
+    }
+    
+    .team-examples {
+      background: #e0f7fa;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #00587a;
+      border-left: 4px solid #008891;
+    }
+    
+    .water-effect {
+      position: absolute;
+      bottom: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: rgba(0, 136, 145, 0.1);
+      border-radius: 45%;
+      animation: wave 12s infinite linear;
+      z-index: 0;
+    }
+    
+    .water-effect:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      bottom: -30px;
+      right: 20px;
+      animation-duration: 10s;
+      opacity: 0.7;
+    }
+    
+    @keyframes wave {
+      0% {
+        transform: rotate(0deg);
+        border-radius: 45%;
+      }
+      50% {
+        border-radius: 40%;
+      }
+      100% {
+        transform: rotate(360deg);
+        border-radius: 45%;
+      }
+    }
+    
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .icons {
+        flex-wrap: wrap;
+      }
+      
+      button {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="water-effect"></div>
+    <div class="water-effect"></div>
+    
+    <div class="content">
+      <h1>
+        <i class="fas fa-brain"></i>
+        ابدأ اللعبة
+      </h1>
+      
+      <div class="input-group">
+        <label for="team1">اسم الفريق 1:</label>
+        <input type="text" id="team1" placeholder="مثال: الأذكياء" />
+      </div>
+      
+      <div class="input-group">
+        <label for="team2">اسم الفريق 2:</label>
+        <input type="text" id="team2" placeholder="مثال: المحترفون" />
+      </div>
+      
+      <button onclick="saveTeams()">
+        التالي
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      
+      
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
